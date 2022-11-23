@@ -1,24 +1,38 @@
+// Variáveis do tabuleiro
 let height = 400
 let width = 600
 
+// Variáveis da bolinha
 let xBolinha = 300
 let yBolinha = 200
-let diametro = 15
+let diametro = 25
 let raio = diametro / 2
 
+// Variáveis de velocidade
 let velocidadeXBolinha = 6
 let velocidadeYBolinha = 6
 
-const setup = () => {
+function setup() {
   createCanvas(width, height)
 }
 
-const draw = () => {
+function draw() {
   background(0)
+  desenharBolinha()
+  movimentarBolinha()
+  verificarColisao()
+}
+
+const desenharBolinha = () => {
   circle(xBolinha, yBolinha, diametro)
+}
+
+const movimentarBolinha = () => {
   xBolinha += velocidadeXBolinha
   yBolinha += velocidadeYBolinha
+}
 
+const verificarColisao = () => {
   if (xBolinha+raio > width || xBolinha-raio < 0) {
     velocidadeXBolinha *= -1;
   }

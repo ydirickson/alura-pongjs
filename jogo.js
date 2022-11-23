@@ -15,6 +15,8 @@ let velocidadeYBolinha = 6
 //variáveis da raquete
 let xRaquete = 5;
 let yRaquete = 150;
+let xRaqueteOponente = 585;
+let yRaqueteOponente = 150;
 let raqueteComprimento = 10;
 let raqueteAltura = 90;
 
@@ -29,6 +31,7 @@ function draw() {
   verificarColisaoBorda()
   verificarColisaoRaquete()
   desenharRaquete()
+  desenharRaqueteOponente()
   movimentarMinhaRaquete()
 }
 
@@ -38,6 +41,10 @@ const desenharBolinha = () => {
 
 const desenharRaquete = () => {
   rect(xRaquete, yRaquete, raqueteComprimento, raqueteAltura)
+}
+
+const desenharRaqueteOponente = () => {
+  rect(xRaqueteOponente, yRaqueteOponente, raqueteComprimento, raqueteAltura)
 }
 
 const movimentarBolinha = () => {

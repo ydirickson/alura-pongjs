@@ -12,6 +12,12 @@ let raio = diametro / 2
 let velocidadeXBolinha = 6
 let velocidadeYBolinha = 6
 
+//variáveis da raquete
+let xRaquete = 5;
+let yRaquete = 150;
+let raqueteComprimento = 10;
+let raqueteAltura = 90;
+
 function setup() {
   createCanvas(width, height)
 }
@@ -20,11 +26,18 @@ function draw() {
   background(0)
   desenharBolinha()
   movimentarBolinha()
-  verificarColisao()
+  verificarColisaoBorda()
+  verificarColisaoRaquete()
+  desenharRaquete()
+  movimentarMinhaRaquete()
 }
 
 const desenharBolinha = () => {
   circle(xBolinha, yBolinha, diametro)
+}
+
+const desenharRaquete = () => {
+  rect(xRaquete, yRaquete, raqueteComprimento, raqueteAltura)
 }
 
 const movimentarBolinha = () => {
@@ -32,11 +45,27 @@ const movimentarBolinha = () => {
   yBolinha += velocidadeYBolinha
 }
 
-const verificarColisao = () => {
+const movimentarMinhaRaquete = () => {
+  if(keyIsDown(UP_ARROW)){
+    yRaquete -= 10
+  } else if(keyIsDown(DOWN_ARROW)){
+    yRaquete += 10
+  }
+}
+
+const verificarColisaoBorda = () => {
   if (xBolinha+raio > width || xBolinha-raio < 0) {
     velocidadeXBolinha *= -1;
   }
   if (yBolinha+raio > height || yBolinha-raio < 0) {
       velocidadeYBolinha *= -1;
+  }
+}
+
+const verificarColisaoRaquete = () => {
+  if (xBolinha - raio < xRaquete + raqueteComprimento
+      && yBolinha - raio < yRaquete + raqueteAltura
+      && yBolinha + raio > yRaquete) {
+      velocidadeXBolinha *= -1;
   }
 }

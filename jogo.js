@@ -63,9 +63,12 @@ const verificarColisaoBorda = () => {
 }
 
 const verificarColisaoRaquete = () => {
-  if (xBolinha - raio < xRaquete + raqueteComprimento
+  /*if (xBolinha - raio < xRaquete + raqueteComprimento
       && yBolinha - raio < yRaquete + raqueteAltura
       && yBolinha + raio > yRaquete) {
-      velocidadeXBolinha *= -1;
+      velocidadeXBolinha *= -1
+  }*/
+  if(collideRectCircle(xRaquete, yRaquete, raqueteComprimento, raqueteAltura, xBolinha, yBolinha, raio)){
+    velocidadeXBolinha *= -1
   }
 }

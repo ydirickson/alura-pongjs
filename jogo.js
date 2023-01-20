@@ -17,6 +17,7 @@ let xRaquete = 5;
 let yRaquete = 150;
 let xRaqueteOponente = 585;
 let yRaqueteOponente = 150;
+let velocidadeYOponente = 0;
 let raqueteComprimento = 10;
 let raqueteAltura = 90;
 
@@ -29,10 +30,12 @@ function draw() {
   desenharBolinha()
   movimentarBolinha()
   verificarColisaoBorda()
-  verificarColisaoRaquete()
+  verificarColisaoRaquete(xRaquete, yRaquete)
+  verificarColisaoRaquete(xRaqueteOponente, yRaqueteOponente)
   desenharRaquete(xRaquete, yRaquete)
   desenharRaquete(xRaqueteOponente, yRaqueteOponente)
   movimentarMinhaRaquete()
+  movimentarRaqueteOpenente()
 }
 
 const desenharBolinha = () => {
@@ -56,6 +59,11 @@ const movimentarMinhaRaquete = () => {
   }
 }
 
+const movimentarRaqueteOpenente = () => {
+  velocidadeYOponente = yBolinha - yRaqueteOponente - raqueteComprimento / 2 - 30;
+  yRaqueteOponente += velocidadeYOponente
+}
+
 const verificarColisaoBorda = () => {
   if (xBolinha+raio > width || xBolinha-raio < 0) {
     velocidadeXBolinha *= -1;
@@ -65,8 +73,8 @@ const verificarColisaoBorda = () => {
   }
 }
 
-const verificarColisaoRaquete = () => {
-  if(collideRectCircle(xRaquete, yRaquete, raqueteComprimento, raqueteAltura, xBolinha, yBolinha, raio)){
+const verificarColisaoRaquete = (x, y) => {
+  if(collideRectCircle(x, y, raqueteComprimento, raqueteAltura, xBolinha, yBolinha, raio)){
     velocidadeXBolinha *= -1
   }
 }

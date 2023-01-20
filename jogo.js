@@ -25,8 +25,20 @@ let raqueteAltura = 90;
 let meusPontos = 0;
 let pontosDoOponente = 0;
 
+//sons do jogo
+let raquetada;
+let ponto;
+let trilha;
+
 function setup() {
   createCanvas(width, height)
+  trilha.loop()
+}
+
+function preload() {
+  trilha = loadSound("sons/trilha.mp3");
+  ponto = loadSound("sons/ponto.mp3");
+  raquetada = loadSound("sons/raquetada.mp3");
 }
 
 function draw() {
@@ -69,9 +81,11 @@ const incluiPlacar = () => {
 const marcaPonto = () => {
   if (xBolinha > 590) {
       meusPontos += 1;
+      ponto.play();
   }
   if (xBolinha < 10) {
       pontosDoOponente += 1;
+      ponto.play();
   }
 }
 
@@ -104,6 +118,7 @@ const verificarColisaoBorda = () => {
 
 const verificarColisaoRaquete = (x, y) => {
   if(collideRectCircle(x, y, raqueteComprimento, raqueteAltura, xBolinha, yBolinha, raio)){
-    velocidadeXBolinha *= -1
+    velocidadeXBolinha *= -1;
+    raquetada.play();
   }
 }

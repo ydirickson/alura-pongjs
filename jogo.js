@@ -5,12 +5,12 @@ let width = 600
 // Variáveis da bolinha
 let xBolinha = 300
 let yBolinha = 200
-let diametro = 25
+let diametro = 20
 let raio = diametro / 2
 
 // Variáveis de velocidade
-let velocidadeXBolinha = 6
-let velocidadeYBolinha = 6
+let velocidadeXBolinha = 3
+let velocidadeYBolinha = 3
 
 //variáveis da raquete
 let xRaquete = 5;
@@ -21,6 +21,10 @@ let velocidadeYOponente = 0;
 let raqueteComprimento = 10;
 let raqueteAltura = 90;
 
+//placar do jogo
+let meusPontos = 0;
+let pontosDoOponente = 0;
+
 function setup() {
   createCanvas(width, height)
 }
@@ -28,7 +32,9 @@ function setup() {
 function draw() {
   background(0)
   desenharBolinha()
+  incluiPlacar()
   movimentarBolinha()
+  marcaPonto()
   verificarColisaoBorda()
   verificarColisaoRaquete(xRaquete, yRaquete)
   verificarColisaoRaquete(xRaqueteOponente, yRaqueteOponente)
@@ -46,6 +52,21 @@ const desenharRaquete = (x, y) => {
   rect(x, y, raqueteComprimento, raqueteAltura)
 }
 
+const incluiPlacar = () => {
+  fill(255);
+  text(meusPontos, 278, 26);
+  text(pontosDoOponente, 321, 26);
+}
+
+const marcaPonto = () => {
+  if (xBolinha > 590) {
+      meusPontos += 1;
+  }
+  if (xBolinha < 10) {
+      pontosDoOponente += 1;
+  }
+}
+
 const movimentarBolinha = () => {
   xBolinha += velocidadeXBolinha
   yBolinha += velocidadeYBolinha
@@ -60,7 +81,7 @@ const movimentarMinhaRaquete = () => {
 }
 
 const movimentarRaqueteOpenente = () => {
-  velocidadeYOponente = yBolinha - yRaqueteOponente - raqueteComprimento / 2 - 30;
+  velocidadeYOponente = yBolinha - yRaqueteOponente - raqueteComprimento / 2 - 40;
   yRaqueteOponente += velocidadeYOponente
 }
 
